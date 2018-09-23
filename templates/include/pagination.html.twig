@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            <ul class="pagination">
+                <li class="paginate_button page-item previous {% if page == 1 %}disabled{% endif %}">
+                    <a {% if page > 1 %}href="{{route}}?page={{ page-1 }}&per_page={{ per_page }}"{% endif %}  class="page-link">Previous</a>
+                </li>
+                <li class="paginate_button page-item next {% if page == total_pages %}disabled{% endif %}">
+                    <a {% if page < total_pages %}href="{{route}}?page={{ page+1 }}&per_page={{ per_page }}"{% endif %}  class="page-link">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
