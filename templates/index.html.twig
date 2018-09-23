@@ -1,0 +1,85 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">User List</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Users
+                </div>
+                <!-- DataTables Example -->
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div>
+                                <label>
+                                    Show:
+                                    <select class="custom-select custom-select-sm form-control form-control-sm"
+                                    onchange="$(location).attr('href', '/' + '?page=1&per_page=' + $(this).val())"
+                                    >
+                                        <option {% if params["per_page"] == 10 %}selected{% endif %} value="10">10 </option>
+                                        <option {% if params["per_page"] == 20 %}selected{% endif %} value="20">20</option>
+                                        <option {% if params["per_page"] == 50 %}selected{% endif %} value="50">50</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Avatar</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Avatar</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for user in collection.data %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td><img src="{{ user.avatar }}" alt="" /></td>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% include 'include/pagination.html.twig' with {'route': path_for('list'),  "page" : collection.page, "per_page" :collection.perPage, "total_pages": collection.totalPages} %}
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Grzegorz Bandur 2018</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}
