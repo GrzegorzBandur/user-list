@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class ApiUserCollection implements ApiCollectionInterface
+class ApiUserCollection implements ApiUserCollectionInterface
 {
     /** @var int */
     private $page;
@@ -71,12 +71,20 @@ class ApiUserCollection implements ApiCollectionInterface
         return $this->totalPages;
     }
 
-    public function addData(ApiUser $apiUser)
+    /**
+     * @param ApiUserInterface $apiUser
+     * @return mixed|void
+     */
+    public function addData(ApiUserInterface $apiUser)
     {
         $this->data[] = $apiUser;
     }
 
-    public function removeData(ApiUser $apiUser)
+    /**
+     * @param ApiUserInterface $apiUser
+     * @return mixed|void
+     */
+    public function removeData(ApiUserInterface $apiUser)
     {
         $searchKey = array_search($apiUser, $this->data);
         if ($searchKey!==false) {

@@ -2,11 +2,16 @@
 
 namespace App\Service;
 
-use App\Model\ApiCollectionInterface;
+use App\Model\ApiUserCollectionInterface;
 use App\Provider\UserProviderInterface;
 use Slim\Http\Request;
 
 interface ListUserServiceInterface
 {
-    public function getUsers(Request $request, UserProviderInterface $userProvider) : ApiCollectionInterface;
+    /**
+     * @param Request $request
+     * @param UserProviderInterface $userProvider
+     * @return ApiUserCollectionInterface
+     */
+    public function getUsers(Request $request, UserProviderInterface $userProvider) : ApiUserCollectionInterface;
 }

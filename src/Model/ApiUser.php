@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class ApiUser
+class ApiUser implements ApiUserInterface
 {
     /** @var int */
     private $id;

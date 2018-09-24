@@ -4,6 +4,7 @@ namespace App\Provider;
 
 use App\Model\ApiUser;
 use App\Model\ApiUserCollection;
+use App\Model\ApiUserCollectionInterface;
 
 class UserProvider implements UserProviderInterface
 {
@@ -19,9 +20,9 @@ class UserProvider implements UserProviderInterface
     /**
      * @param Int $page
      * @param Int $perPage
-     * @return ApiUserCollection
+     * @return ApiUserCollectionInterface
      */
-    public function listUsers(?Int $page, ?Int $perPage): ApiUserCollection
+    public function listUsers(?Int $page, ?Int $perPage): ApiUserCollectionInterface
     {
         $page > 0 ? : $page = self::DEFAULT_START_PAGE;
         $perPage > 0 ? : $perPage = self::DEFAULT_PER_PAGE;
@@ -33,6 +34,11 @@ class UserProvider implements UserProviderInterface
         ));
     }
 
+    /**
+     * @param string $url
+     * @param array $getParameters
+     * @return array
+     */
     private function makeGETRequest(string $url, array $getParameters): array
     {
         $curl = curl_init();
@@ -46,7 +52,12 @@ class UserProvider implements UserProviderInterface
 
         return json_decode($resp, true);
     }
-    private function arrayToApiUserCollection(array $jsonArray): ApiUserCollection
+
+    /**
+     * @param array $jsonArray
+     * @return ApiUserCollectionInterface
+     */
+    private function arrayToApiUserCollection(array $jsonArray): ApiUserCollectionInterface
     {
         $apiCollection = new ApiUserCollection(
             $jsonArray["page"],
