@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-interface ApiCollectionInterface
+interface ApiUserCollectionInterface
 {
     /**
      * @return int
@@ -27,4 +27,15 @@ interface ApiCollectionInterface
      * @return mixed
      */
     public function getData();
+    /**
+     * @param ApiUserInterface $apiUser
+     * @return mixed
+     */
+    public function addData(ApiUserInterface $apiUser);
+
+    /**
+     * @param ApiUserInterface $apiUser
+     * @return mixed
+     */
+    public function removeData(ApiUserInterface $apiUser);
 }
